@@ -1,23 +1,17 @@
 # async-pm2
 
-[![NPM version](https://img.shields.io/npm/v/async-pm2.svg?style=flat)](https://npmjs.org/package/async-pm2)
-[![NPM downloads](http://img.shields.io/npm/dm/async-pm2.svg?style=flat)](https://npmjs.org/package/async-pm2)
+Just add "Async" after the function name
 
-## Install
+```typescript
+import { connectAsync, listAsync, startAsync } from "async-pm2"
 
-```bash
-$ yarn install
+async function main() {
+    await connectAsync()
+    const result = await startAsync("./app.js")
+    console.log(result)
+    const list = await listAsync()
+    console.log(list)
+}
+
+main()
 ```
-
-```bash
-$ npm run dev
-$ npm run build
-```
-
-## Options
-
-TODO
-
-## LICENSE
-
-MIT
