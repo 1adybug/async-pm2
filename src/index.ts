@@ -73,7 +73,7 @@ export function startAsync(optionsOrJsonConfigFileOrScript: StartOptions | strin
 
 export function stopAsync(process: string | number): Promise<Proc> {
     return new Promise((resolve, reject) => {
-        stop(process, (err, proc) => {
+        stop.bind(pm2)(process, (err, proc) => {
             if (err) {
                 reject(err)
             } else {
@@ -85,7 +85,7 @@ export function stopAsync(process: string | number): Promise<Proc> {
 
 export function restartAsync(process: string | number): Promise<Proc> {
     return new Promise((resolve, reject) => {
-        restart(process, (err, proc) => {
+        restart.bind(pm2)(process, (err, proc) => {
             if (err) {
                 reject(err)
             } else {
@@ -106,7 +106,7 @@ export interface ReloadOptions {
 export function reloadAsync(process: string | number, options: ReloadOptions): Promise<Proc> {
     return new Promise((resolve, reject) => {
         if (options) {
-            reload(process, options, (err, proc) => {
+            reload.bind(pm2)(process, options, (err, proc) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -115,7 +115,7 @@ export function reloadAsync(process: string | number, options: ReloadOptions): P
             })
             return
         }
-        reload(process, (err, proc) => {
+        reload.bind(pm2)(process, (err, proc) => {
             if (err) {
                 reject(err)
             } else {
@@ -127,7 +127,7 @@ export function reloadAsync(process: string | number, options: ReloadOptions): P
 
 export function deleteAsync(process: string | number): Promise<Proc> {
     return new Promise((resolve, reject) => {
-        del(process, (err, proc) => {
+        del.bind(pm2)(process, (err, proc) => {
             if (err) {
                 reject(err)
             } else {
@@ -139,7 +139,7 @@ export function deleteAsync(process: string | number): Promise<Proc> {
 
 export function killDaemonAsync(): Promise<ProcessDescription> {
     return new Promise((resolve, reject) => {
-        killDaemon((err, processDescription) => {
+        killDaemon.bind(pm2)((err, processDescription) => {
             if (err) {
                 reject(err)
             } else {
@@ -151,7 +151,7 @@ export function killDaemonAsync(): Promise<ProcessDescription> {
 
 export function describeAsync(process: string | number): Promise<ProcessDescription[]> {
     return new Promise((resolve, reject) => {
-        describe(process, (err, processDescriptionList) => {
+        describe.bind(pm2)(process, (err, processDescriptionList) => {
             if (err) {
                 reject(err)
             } else {
@@ -175,7 +175,7 @@ export function listAsync(): Promise<ProcessDescription[]> {
 
 export function sendDataToProcessIdAsync(proc_id: number, packet: object): Promise<any> {
     return new Promise((resolve, reject) => {
-        sendDataToProcessId(proc_id, packet, (err, result) => {
+        sendDataToProcessId.bind(pm2)(proc_id, packet, (err, result) => {
             if (err) {
                 reject(err)
             } else {
@@ -187,7 +187,7 @@ export function sendDataToProcessIdAsync(proc_id: number, packet: object): Promi
 
 export function launchBusAsync(): Promise<any> {
     return new Promise((resolve, reject) => {
-        launchBus((err, bus) => {
+        launchBus.bind(pm2)((err, bus) => {
             if (err) {
                 reject(err)
             } else {
@@ -199,7 +199,7 @@ export function launchBusAsync(): Promise<any> {
 
 export function sendSignalToProcessNameAsync(signal: string | number, process: number | string): Promise<any> {
     return new Promise((resolve, reject) => {
-        sendSignalToProcessName(signal, process, (err, result) => {
+        sendSignalToProcessName.bind(pm2)(signal, process, (err, result) => {
             if (err) {
                 reject(err)
             } else {
@@ -215,7 +215,7 @@ export function sendSignalToProcessNameAsync(signal: string | number, process: n
  */
 export function dumpAsync(): Promise<any> {
     return new Promise((resolve, reject) => {
-        dump((err, result) => {
+        dump.bind(pm2)((err, result) => {
             if (err) {
                 reject(err)
             } else {
@@ -232,7 +232,7 @@ export function dumpAsync(): Promise<any> {
  */
 export function flushAsync(process: number | string): Promise<any> {
     return new Promise((resolve, reject) => {
-        flush(process, (err, result) => {
+        flush.bind(pm2)(process, (err, result) => {
             if (err) {
                 reject(err)
             } else {
@@ -244,7 +244,7 @@ export function flushAsync(process: number | string): Promise<any> {
 
 export function reloadLogsAsync(): Promise<any> {
     return new Promise((resolve, reject) => {
-        reloadLogs((err, result) => {
+        reloadLogs.bind(pm2)((err, result) => {
             if (err) {
                 reject(err)
             } else {
@@ -258,7 +258,7 @@ export type Platform = "ubuntu" | "centos" | "redhat" | "gentoo" | "systemd" | "
 
 export function startupAsync(platform: Platform): Promise<any> {
     return new Promise((resolve, reject) => {
-        startup(platform, (err, result) => {
+        startup.bind(pm2)(platform, (err, result) => {
             if (err) {
                 reject(err)
             } else {
